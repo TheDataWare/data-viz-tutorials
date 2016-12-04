@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scatter Plots - D3 Tutorials</title>
+        <link rel="import" href="../lib.html" />
+    </head>
+    <body>
+        <div id="tooltip" class="hidden">
+            <p><strong id="label">Label Heading</strong></p>
+            <p><span id="value">1</span></p>
+        </div>
+        <div class="container mb-3">
+            <h1 class="text-xs-center mt-3">Scatter Plot d3 implementation</h1>
+            <h3 class="text-xs-center">Read the full post <a href="http://www.thedataware.com/post/a-primer-on-data-visualization-scatter-plots">here</a></h3>
+            <h3 class="text-xs-center mt-3">Simple - No interactivity</h3>
+            <svg id="scatter-simple"></svg>
+            <h3 class="text-xs-center mt-3">Interactive plot</h3>
+            <svg id="scatter-interactive"></svg>
+            <h3 class="text-xs-center mt-3">Interactive + Dynamic radius</h3>
+            <svg id="scatter-dynamic-radius"></svg>
+            <h3 class="text-xs-center mt-3">Interactive + Dynamic colors</h3>
+            <svg id="scatter-dynamic-color"></svg>
+            <h3 class="text-xs-center mt-3">Interactive + Dynamic radius + Dynamic colors</h3>
+            <svg id="scatter-complete"></svg>
+        </div>
+        <script type="text/javascript" src="scatter.js"></script>
+    </body>
+</html>
