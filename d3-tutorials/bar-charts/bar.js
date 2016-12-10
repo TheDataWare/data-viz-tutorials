@@ -6,7 +6,7 @@
  *     @param svgId: id of the svg element onto which draw the barchart
  *     @param xkey: the key to use in the x-axis
  *     @param ykeys: list of the keys to use in the y-axis
- *     @param ycols: list of the same length as ykeys, with the colors of the bars for the keys
+ *     @param ycols: d3 color function, for example d3.scaleOrdinal(d3.schemeCategory10)
  *     @param ylabel: label to put in the y-axis
  *     @param stacked: if true, create stacked bars (makes sense only if ykeys > 1)
  *     @param w: width of the svg
@@ -68,7 +68,7 @@ var barChart = function(config) {
             .data(dataset)
             .enter()
             .append("g")
-            .style("fill", config.ycols[k]);
+            .style("fill", config.ycols(k));
 
         if (config.stacked) {
             bars.append("rect")
@@ -99,10 +99,10 @@ var barChart = function(config) {
                     return height - y(d[ykey]);
                 });
         }
-        
+
         bars
             .on("mouseover", function(d) {
-                d3.select(this).style("fill", shadeColor(config.ycols[k], -30));
+                d3.select(this).style("fill", shadeColor(config.ycols(k), -30));
                 let tooltip = d3.select("#tooltip")
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY) + "px");
@@ -116,7 +116,7 @@ var barChart = function(config) {
                 d3.select("#tooltip").classed("hidden", false);
             })
             .on("mouseout", function(d) {
-                d3.select(this).style("fill", config.ycols[k]);
+                d3.select(this).style("fill", config.ycols(k));
                 d3.select("#tooltip").classed("hidden", true);
             });
     });
@@ -143,16 +143,51 @@ var barChart = function(config) {
         .attr("text-anchor", "middle")
         .style("font-size", "20")
         .text(strCapitalize(config.xkey));
-        
+
     // -------------- //
     // Add the legend //
     // -------------- //
 
-    // svg.append("g")
-        // .attr("class", "legend")
-        // .attr("transform", "translate(50, 30)")
-        // .style("font-size", "12")
-        // .call(d3.legend);
+    let legendItemWidth = 150;
+    let legendItemHeight = 30;
+
+    let legend = svg.append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(50, 30)")
+        .style("font-size", "12")
+        .selectAll("rect")
+        .data(config.ykeys)
+        .enter()
+        .append("g");
+
+    legend.append("rect")
+        .attr("y", function(d, i) {
+            return i * legendItemHeight;
+        })
+        .attr("width", legendItemWidth)
+        .attr("height", legendItemHeight)
+        .style("fill", "#ffffff")
+        .style("stroke", "#000000");
+
+    legend.append("circle")
+        .style("fill", function(d, i) {
+            return config.ycols(i);
+        })
+        .attr("cx", 15)
+        .attr("cy", function(d, i) {
+            return (legendItemHeight * i) + (legendItemHeight / 2);
+        })
+        .attr("r", (legendItemHeight / 2) - 5);
+
+    legend.append("text")
+        .attr("x", 40)
+        .attr("y", function(d, i) {
+            return (legendItemHeight * i) + (legendItemHeight / 2 + 5);
+        })
+        .text(function(d) {
+            return strCapitalize(d);
+        })
+        .style("font-size", 16);
 
 };
 
@@ -279,7 +314,7 @@ barChart({
     svgId: "bar-simple",
     xkey: "year",
     ykeys: ["apples"],
-    ycols: ["#4682b4"],
+    ycols: d3.scaleOrdinal(d3.schemeCategory10),
     ylabel: "Quantity",
     stacked: false,
     w: w,
@@ -296,7 +331,7 @@ barChart({
     svgId: "bar-two",
     xkey: "year",
     ykeys: ["apples", "oranges"],
-    ycols: ["#4682b4", "#FFA500"],
+    ycols: d3.scaleOrdinal(d3.schemeCategory10),
     ylabel: "Quantity",
     stacked: false,
     w: w,
@@ -313,7 +348,7 @@ barChart({
     svgId: "bar-three",
     xkey: "year",
     ykeys: ["apples", "oranges", "bananas"],
-    ycols: ["#4682b4", "#FFA500", "#007F00"],
+    ycols: d3.scaleOrdinal(d3.schemeCategory10),
     ylabel: "Quantity",
     stacked: false,
     w: w,
@@ -330,7 +365,7 @@ barChart({
     svgId: "bar-stacked",
     xkey: "year",
     ykeys: ["apples", "oranges", "bananas"],
-    ycols: ["#4682b4", "#FFA500", "#007F00"],
+    ycols: d3.scaleOrdinal(d3.schemeCategory10),
     ylabel: "Quantity",
     stacked: true,
     w: w,

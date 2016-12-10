@@ -2,12 +2,6 @@
     display: none;
 }
 
-.legend rect {
-    fill:white;
-    stroke:black;
-    opacity:0.8;
-}
-
 #tooltip {
     position: absolute;
     width: 200px;
