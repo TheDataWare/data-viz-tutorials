@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Trees - D3 Tutorials</title>
+        <link rel="import" href="../lib.html" />
+    </head>
+    <body>
+        <div id="tooltip" class="hidden">
+            <p><strong id="label">Label Heading</strong></p>
+            <p><span id="value">1</span></p>
+        </div>
+        <div class="container mb-3">
+            <h1 class="text-xs-center mt-3">Tree data structure d3 implementation</h1>
+            <h3 class="text-xs-center">Read the full post <a href="http://www.thedataware.com/post/on-counting-in-probability">here</a></h3>
+            <h3 class="text-xs-center mt-3">
+                Explaining the product rule for counting with a tree. The number of
+                possible choices is equal to the number of leaves in the tree, which
+                are 3 x 3 x 2 x 2 = 36.
+            </h3>
+            <svg id="tree-car"></svg>
+            <h3 class="text-xs-center mt-3">
+                Explaining a corollary of the product rule for counting with a tree.
+                Namely, that the number of possible subsets of a set of N elements
+                is 2 to the Nth power.
+            </h3>
+            <svg id="tree-subsets"></svg>
+        </div>
+        <script type="text/javascript" src="tree.js"></script>
+    </body>
+</html>
