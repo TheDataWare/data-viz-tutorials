@@ -156,21 +156,21 @@ var dataset = [{
     "units": 76743.5,
     "perc": 22.3
 }, {
-    "name": "Apple",
-    "units": 44395,
-    "perc": 12.9
+    "name": "Oppo",
+    "units": 18489.6,
+    "perc": 5.4
 }, {
     "name": "Huawei",
     "units": 30670.7,
     "perc": 8.9
 }, {
-    "name": "Oppo",
-    "units": 18489.6,
-    "perc": 5.4
-}, {
     "name": "Xiaomi",
     "units": 15530.7,
     "perc": 4.5
+}, {
+    "name": "Apple",
+    "units": 44395,
+    "perc": 12.9
 }, {
     "name": "Others",
     "units": 158530.3,
