@@ -3,7 +3,7 @@
  *
  * @param config: a javascript object with the following properties:
  *     @param dataset: the dataset to visualize, should be in [{obj}, {obj}, ..] format
- *     @param svgId: id of the svg element onto which draw the barchart
+ *     @param svgId: id of the svg element onto which draw the piechart
  *     @param dispkey: the names to display in the slices
  *     @param dispval: the values to display in the tooltip
  *     @param perckey: the percentage values
